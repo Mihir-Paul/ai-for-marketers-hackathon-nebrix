@@ -2,11 +2,26 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+<<<<<<< HEAD
+import {
+  Send,
+  Paperclip,
+  Mic,
+  Image as ImageIcon,
+  StopCircle,
+  RefreshCw,
+  Copy,
+  FileText,
+  ChevronRight,
+  ChevronLeft,
+  Sparkles,
+=======
 import { 
   Send, Paperclip, Mic, Image as ImageIcon, 
   Settings2, Bot, User, StopCircle, RefreshCw, 
   Copy, Share, FileText, ChevronRight, ChevronLeft,
   Sparkles
+>>>>>>> bf37c5909541ae5551f45803b9cfd61427c7bb43
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -89,7 +104,7 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="flex h-[calc(100vh-6rem)] w-full overflow-hidden rounded-2xl border border-border/50 bg-card/50 backdrop-blur-xl shadow-sm">
+    <div className="flex h-[calc(100vh-6rem)] w-full overflow-hidden rounded-[32px] border border-border/80 bg-background/80">
       {/* Context Sidebar (Left) */}
       <AnimatePresence initial={false}>
         {isSidebarOpen && (
@@ -97,10 +112,10 @@ export default function ChatPage() {
             initial={{ width: 0, opacity: 0 }}
             animate={{ width: 280, opacity: 1 }}
             exit={{ width: 0, opacity: 0 }}
-            className="border-r border-border/50 bg-muted/20 flex flex-col hidden md:flex"
+            className="hidden flex-col border-r border-border/80 bg-[linear-gradient(180deg,#ffffff_0%,#f7f7ef_100%)] md:flex"
           >
-            <div className="p-4 border-b border-border/50">
-              <Button variant="outline" className="w-full justify-start text-muted-foreground bg-background/50">
+            <div className="border-b border-border/80 p-4">
+              <Button variant="outline" className="w-full justify-start rounded-full bg-background/90 text-foreground">
                 <FileText className="mr-2 h-4 w-4" />
                 New Chat
               </Button>
@@ -108,7 +123,7 @@ export default function ChatPage() {
             <ScrollArea className="flex-1 p-2">
               <div className="space-y-1">
                 <div className="px-2 py-1 text-xs font-semibold text-muted-foreground mt-2">Today</div>
-                <Button variant="ghost" className="w-full justify-start text-sm truncate bg-primary/10 text-primary">
+                <Button variant="ghost" className="w-full justify-start truncate rounded-full bg-primary/15 text-sm text-primary">
                   Q3 Marketing Strategy Analysis
                 </Button>
                 <Button variant="ghost" className="w-full justify-start text-sm truncate text-muted-foreground hover:text-foreground">
@@ -130,7 +145,7 @@ export default function ChatPage() {
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col relative">
         <div className="absolute top-4 left-4 z-10 md:block hidden">
-          <Button variant="outline" size="icon" className="h-8 w-8 rounded-full bg-background/50 backdrop-blur-sm" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+          <Button variant="outline" size="icon" className="h-8 w-8 rounded-full bg-background/90" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             {isSidebarOpen ? <ChevronLeft className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
           </Button>
         </div>
@@ -144,14 +159,14 @@ export default function ChatPage() {
                 animate={{ opacity: 1, y: 0 }}
                 className={`flex gap-4 ${msg.role === "user" ? "flex-row-reverse" : ""}`}
               >
-                <Avatar className={`h-8 w-8 ${msg.role === 'user' ? 'border-primary border' : 'bg-primary/20 text-primary'}`}>
+                <Avatar className={`h-9 w-9 ${msg.role === 'user' ? 'border border-primary/40' : 'border border-border/80 bg-primary/15 text-primary'}`}>
                   {msg.role === "user" ? (
                     <>
                       <AvatarImage src="" />
                       <AvatarFallback>U</AvatarFallback>
                     </>
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/30">
+                    <div className="flex h-full w-full items-center justify-center rounded-full bg-primary text-primary-foreground">
                       <Sparkles className="h-4 w-4" />
                     </div>
                   )}
@@ -162,10 +177,10 @@ export default function ChatPage() {
                       {msg.role === "user" ? "You" : "Nebrix AI"}
                     </span>
                   </div>
-                  <div className={`rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
-                    msg.role === "user" 
-                      ? "bg-primary text-primary-foreground rounded-tr-sm" 
-                      : "bg-muted/50 text-foreground border border-border/50 rounded-tl-sm"
+                  <div className={`rounded-[24px] px-4 py-3 text-sm leading-7 ${
+                    msg.role === "user"
+                      ? "rounded-tr-sm bg-background text-foreground border border-border/80"
+                      : "rounded-tl-sm bg-muted/80 text-foreground"
                   }`}>
                     {msg.content}
                     {msg.isStreaming && <span className="inline-block w-1.5 h-4 ml-1 bg-primary animate-pulse align-middle" />}
@@ -187,14 +202,14 @@ export default function ChatPage() {
         </div>
 
         {/* Input Area */}
-        <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-background via-background to-transparent pt-10 pb-4 px-4 sm:px-6">
+        <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-background via-background/95 to-transparent px-4 pb-4 pt-10 sm:px-6">
           <div className="max-w-3xl mx-auto">
             <form 
               onSubmit={handleSubmit}
-              className="relative flex items-end w-full rounded-2xl border border-border/50 bg-card/80 backdrop-blur-xl shadow-lg p-2 focus-within:ring-1 focus-within:ring-primary focus-within:border-primary transition-all duration-300"
+              className="relative flex w-full items-end rounded-[24px] border border-border/80 bg-background/90 p-2 transition-all duration-300 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20"
             >
               <div className="flex items-center gap-1 pb-1 pl-1">
-                <Button type="button" variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground rounded-full hover:bg-muted">
+                <Button type="button" variant="ghost" size="icon" className="h-8 w-8 rounded-full text-muted-foreground hover:bg-muted">
                   <Paperclip className="h-4 w-4" />
                 </Button>
                 <Button type="button" variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground rounded-full hover:bg-muted hidden sm:inline-flex">
@@ -216,11 +231,11 @@ export default function ChatPage() {
                   <Mic className="h-4 w-4" />
                 </Button>
                 {isGenerating ? (
-                  <Button type="button" size="icon" className="h-8 w-8 rounded-full bg-destructive/10 text-destructive hover:bg-destructive/20 transition-all">
+                  <Button type="button" size="icon" className="h-8 w-8 rounded-full bg-muted text-muted-foreground hover:bg-muted/80">
                     <StopCircle className="h-4 w-4" />
                   </Button>
                 ) : (
-                  <Button type="submit" size="icon" disabled={!input.trim()} className="h-8 w-8 rounded-full shadow-md transition-all group disabled:opacity-50">
+                  <Button type="submit" size="icon" disabled={!input.trim()} className="group h-8 w-8 rounded-full transition-all disabled:opacity-50">
                     <Send className="h-4 w-4 group-hover:scale-110 transition-transform" />
                   </Button>
                 )}
